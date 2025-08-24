@@ -11,7 +11,8 @@ esphome:
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
+    version: recommended
 
 # Enable logging
 logger:
@@ -22,9 +23,6 @@ api:
 # Allow Over-The-Air updates
 ota:
 - platform: esphome
-
-# Allow provisioning Wi-Fi via serial
-improv_serial:
 
 wifi:
   ssid: !secret wifi_ssid2
@@ -60,17 +58,17 @@ button:
   - platform: template
     name: "Musique stop"
     on_press:
-      - dfplayer.stop:
+      - dfplayer.stop
 
   - platform: template
     name: "Musique suivant"
     on_press:
-      - dfplayer.play_next:
+      - dfplayer.play_next
 
   - platform: template
     name: "Musique précédent"
     on_press:
-      - dfplayer.play_previous:
+      - dfplayer.play_previous
 
 number:
   - platform: template
@@ -87,26 +85,30 @@ number:
 
 output:
   - platform: gpio
+    pin: GPIO02
+    id: internal_led
+
+  - platform: gpio
     pin: GPIO17
-    id: led_output
+    id: external_led
 
 light:
   - platform: binary
-    name: "LED simple"
-    output: led_output
-    id: my_led
+    name: "LED externe"
+    output: external_led
+    id: my_external_led
 
-switch:
-  - platform: output
-    name: "LED Test"
-    output: led_output
+  - platform: binary
+    name: "LED interne"
+    output: internal_led
+    id: my_internal_led
 
 binary_sensor:
   - platform: gpio
     pin:
       number: GPIO16
       mode: INPUT_PULLUP  # Active la résistance pull-up interne
-      inverted: true       # Inversion logique (0 quand appuyé)
+      inverted: false       # Inversion logique (0 quand appuyé)
     name: "Capteur bouton"
     filters:
       - delayed_on: 10ms
@@ -119,6 +121,8 @@ binary_sensor:
                 script.is_running: play_music_if_allowed
             then:
               - script.execute: play_music_if_allowed
-        - light.turn_on: my_led
+        - light.turn_on: my_internal_led
+        - light.turn_on: my_external_led
         - delay: 200ms
-        - light.turn_off: my_led
+        - light.turn_off: my_internal_led
+        - light.turn_off: my_external_led
