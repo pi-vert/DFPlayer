@@ -96,25 +96,25 @@ Ce projet utilise un module **DFPlayer Mini** monté sur une plaque à pastilles
 
 ```
 
-          ┌───────────────────── DFPlayer Mini (MP3-TF-16P v3.0) ─────────────────────┐
-          │                                                                           │
- USB 5V ──┤ VCC                                                                   GND ├───┐
-  (blanc) │                                                                           │   │
-          │ DAC_L ────────────────┐                                        IO2 ──┐   │   │
-          │                       │                                       (BTN2) │   │   │
-          │ DAC_R ───────────┐    ├───► Vers prise JACK noire (sortie DAC)      │   │   │
-          │                  │    │                                             │   │   │
-          │ GND ─────────────┴────┴─────────────────────────────────────────────┴───┴───┘
-          │                                                                           ▲
-          │ IO1 ──┐ (BTN1)                                                            │
-          │       └────── Bouton vers GND (piste suivante)                            │
-          │                                                                           │
-          │ IO2 ──┐ (BTN2)                                                            │
-          │       └────── Bouton vers GND (piste précédente)                          │
-          │                                                                           │
-          │ AUTO_SW ──┐                                                               │
-          │           └── Interrupteur ► GND  →  **Lecture automatique au démarrage** │
-          └───────────────────────────────────────────────────────────────────────────┘
+               ┌─ DFPlayer Mini (MP3-TF-16P v3.0) ─┐
+               │                                   │
+    USB 5V ────┤ VCC                          BUSY │
+     (blanc)   │                                   │
+         │     │ RX                          USB - │ 
+         │     │                                   │
+         │     │ TX                          USB + │
+         │     │                                   │
+─────────│────-┤ DAC_R                     ADKEY_2 │  
+JACK     │     │                                   │
+(noir) ──│────-┤ DAC_L                     ADKEY_1 │──────────────┐
+         │     │                                   │              │
+         │     │ SPK_1                        IO_2 │───────┐    SWITCH   
+         │     │                                   │     BTN_2    │
+         └────-┤ GND                           GND │──────────────┘
+               │                                   │     BTN_1
+               │ SPK_2                        IO_1 │───────┘
+               │                                   │
+               └───────────────────────────────────┘
 ```
 
  Légende prise JACK (noir) — sortie ligne (DAC) :
