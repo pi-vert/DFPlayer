@@ -2,6 +2,8 @@
 
 Ce projet utilise un module **DFPlayer Mini** monté sur une plaque à pastilles, avec quelques boutons et interrupteurs permettant de contrôler la lecture audio directement.
 
+![DFPlayer](dfplayer.jpg)
+
 ---
 
 ## Matériel
@@ -92,6 +94,8 @@ Ce projet utilise un module **DFPlayer Mini** monté sur une plaque à pastilles
 
 ## Schéma de câblage (ASCII)
 
+```
+
           ┌───────────────────── DFPlayer Mini (MP3-TF-16P v3.0) ─────────────────────┐
           │                                                                           │
  USB 5V ──┤ VCC                                                                   GND ├───┐
@@ -111,6 +115,7 @@ Ce projet utilise un module **DFPlayer Mini** monté sur une plaque à pastilles
           │ AUTO_SW ──┐                                                               │
           │           └── Interrupteur ► GND  →  **Lecture automatique au démarrage** │
           └───────────────────────────────────────────────────────────────────────────┘
+```
 
  Légende prise JACK (noir) — sortie ligne (DAC) :
    • Pointe (Tip)  = DAC_L
